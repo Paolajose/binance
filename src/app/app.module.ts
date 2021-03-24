@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import {ReactiveFormsModule } from'@angular/forms';
 import {FormsModule } from'@angular/forms';
 import { AppComponent } from './app.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 
 @NgModule({
@@ -12,7 +14,8 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

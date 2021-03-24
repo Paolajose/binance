@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2'
+import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
+
+
 
 @Component({
   selector: 'app-root',
@@ -8,6 +11,7 @@ import Swal from 'sweetalert2'
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  model: NgbDateStruct;
   public formGroup: FormGroup;
    oredenCompra = []; 
    oredenVenta = []; 
@@ -30,7 +34,8 @@ export class AppComponent {
     this.formGroup = this.formBuilder.group({
       cantidad: ['', Validators.required],
       precio: ['', Validators.required],
-      tipo: ['', Validators.required]
+      tipo: ['', Validators.required],
+      fecha:['', Validators.required]
     });
   }
 
@@ -40,8 +45,9 @@ export class AppComponent {
     let cantidad = parseFloat(this.formGroup.value.cantidad) ; 
     let precio = parseFloat(this.formGroup.value.precio); 
     let tipo = parseInt(this.formGroup.value.tipo); 
+    let fecha=parseInt(this.formGroup.value.tipo);
 
-    this.ordenes.push({cantidad, precio, tipo, id:this.ordenes.length+1 }); 
+    this.ordenes.push({cantidad, precio, tipo, fecha, id:this.ordenes.length+1 }); 
 
     if (tipo == 1) {
       this.oredenCompra.push({cantidad, precio, estado:1}); 
