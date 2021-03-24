@@ -27,7 +27,7 @@ export class AppComponent {
 
   public ngOnInit() {
     this.buildForm();
-    
+    this.formGroup.valueChanges.subscribe(console.log);
   }
 
   private buildForm(){
@@ -45,7 +45,7 @@ export class AppComponent {
     let cantidad = parseFloat(this.formGroup.value.cantidad) ; 
     let precio = parseFloat(this.formGroup.value.precio); 
     let tipo = parseInt(this.formGroup.value.tipo); 
-    let fecha=parseInt(this.formGroup.value.tipo);
+    let fecha= this.formGroup.value.fecha.day + '/'+this.formGroup.value.fecha.month + '/'+this.formGroup.value.fecha.year;
 
     this.ordenes.push({cantidad, precio, tipo, fecha, id:this.ordenes.length+1 }); 
 
