@@ -62,42 +62,47 @@ export class AppComponent {
     }
     this.formGroup.reset(); 
 
+
+
     console.log(this.oredenCompra);
     console.log(this.oredenVenta);
   }
 
   calcular() {
-        
+      
+
+    // 2000 + 2000 + 1500 - 3000 
+
     let auxCompra = this.oredenCompra; 
     let auxVenta = this.oredenVenta; 
+
     let spreed = 0; 
    
         this.oredenCompra.forEach(orden => {
 
             for (let i = 0; i < this.oredenVenta.length; i++)
             {
-                console.log("aqui", orden.cantidad >= this.oredenVenta[i].cantidad)
-                if (orden.cantidad >= this.oredenVenta[i].cantidad){
+                if (orden.cantidad >= this.oredenVenta[i].cantidad && this.oredenVenta[i].estado != 0){
                     
-                    spreed = this.oredenVenta[i].precio - orden.precio; 
-                    this.ganancia = this.ganancia + (this.oredenVenta[i].cantidad * spreed); 
-                    orden.cantidad = orden.cantidad - this.oredenVenta[i].cantidad; 
-                    this.oredenVenta[i].estado = 0;
-                    console.log("GANANCIA: ",this.ganancia);
+                  spreed = this.oredenVenta[i].precio - orden.precio; 
+                  this.ganancia = this.ganancia + (this.oredenVenta[i].cantidad * spreed); 
+                  orden.cantidad = orden.cantidad - this.oredenVenta[i].cantidad; 
+                  this.oredenVenta[i].estado = 0;
                 }
-
-                if (orden.cantidad < this.oredenVenta[i].cantidad){
-                    // if (oredenVenta[i].estado == 1){
-                        let restante = this.oredenVenta[i].cantidad - orden.cantidad;
-                        spreed = this.oredenVenta[i].precio - orden.precio; 
-                        this.ganancia = this.ganancia + (orden.cantidad * spreed); 
-                        this.oredenVenta[i].cantidad = restante; 
-                        orden.estado = 0;
-                        console.log("GANANCIA", this.ganancia);
-                        console.log("se rompe el ciclo");
-                        break; 
-                    // }
-                    
+                else if (orden.cantidad < this.oredenVenta[i].cantidad){
+                  // if (oredenVenta[i].estado == 1){
+                    let restante = this.oredenVenta[i].cantidad - orden.cantidad;
+                    spreed = this.oredenVenta[i].precio - orden.precio; 
+                    this.ganancia = this.ganancia + (orden.cantidad * spreed); 
+                    this.oredenVenta[i].cantidad = restante; 
+                    orden.cantidad = orden.cantidad - this.oredenVenta[i].cantidad; 
+                    if (this.oredenVenta[i].cantidad > 0){
+                      // i = i - 1;
+                    break; 
+                    } 
+                    orden.estado = 0;
+                    //break; 
+                  // }
                 }
             }
             console.log(orden); 
